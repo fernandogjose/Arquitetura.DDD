@@ -1,0 +1,118 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a [routerLink]="['/']">Home</a>
+        </li>
+        <li class="breadcrumb-item">Anuncio</li>
+        <li class="breadcrumb-item active" *ngIf="this.id <= 0">Adicionar</li>
+        <li class="breadcrumb-item active" *ngIf="this.id > 0">Editar</li>
+      </ol>
+    </nav>
+  </section>
+
+  <section class="conteudo-area">
+    <div class="row mb-4 mt-4">
+      <div class="col-12">
+        <h4>Cadastro de Anuncio</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card w-100 p-3">
+          <form [formGroup]="formCadastro">
+            <div class="row d-flex justify-content-center mt-4">
+
+              <div class="col-4">
+                <div class="select">
+                  <select id="marca" name="marca" class="ng-touched ng-valid w-100" formControlName="marca" (change)="changeMarca()">
+                    <option value="0">Selecione uma opção</option>
+                    <option *ngFor="let marca of marcas" value="{{ marca.ID }}">
+                      {{ marca.Name }}</option>
+                  </select>
+                  <label class="label"><span>Marca</span></label>
+                </div>
+              </div> <!-- marca -->
+
+              <div class="col-4">
+                <div class="select">
+                  <select id="modelo" name="modelo" class="ng-touched ng-valid w-100" formControlName="modelo" (change)="changeModelo()">
+                    <option value="0">Selecione uma opção</option>
+                    <option *ngFor="let modelo of modelos" value="{{ modelo.ID }}">
+                      {{ modelo.Name }}</option>
+                  </select>
+                  <label class="label"><span>Modelo</span></label>
+                </div>
+              </div> <!-- modelo -->
+
+              <div class="col-4">
+                <div class="select">
+                  <select id="versao" name="versao" class="ng-touched ng-valid w-100" formControlName="versao">
+                    <option value="0">Selecione uma opção</option>
+                    <option *ngFor="let versao of versoes" value="{{ versao.ID }}">
+                      {{ versao.Name }}</option>
+                  </select>
+                  <label class="label"><span>Perfil de Acesso</span></label>
+                </div>
+              </div> <!-- versao -->
+
+            </div> <!-- linha 1 -->
+
+            <div class="row d-flex justify-content-center mt-4">
+
+              <div class="col-6">
+								<div class="input-container w-100">
+									<input id="ano" name="ano" class="input" type="number" autocomplete="off" maxlength="4" formControlName="ano">
+									<label class="label" for="ano"><span>Ano</span></label>
+								</div>
+              </div> <!-- ano -->
+
+              <div class="col-6">
+								<div class="input-container w-100">
+									<input id="quilometragem" name="quilometragem" class="input" type="number" autocomplete="off" maxlength="8" formControlName="quilometragem">
+									<label class="label" for="quilometragem"><span>Quilometragem</span></label>
+								</div>
+							</div> <!-- quilometragem -->
+
+            </div> <!-- linha 2 -->
+
+            <div class="row d-flex justify-content-center mt-4">
+
+              <div class="col-12">
+								<div class="input-container w-100">
+									<input id="observacao" name="observacao" class="input" type="text" autocomplete="off" formControlName="observacao">
+									<label class="label" for="observacao"><span>Observação</span></label>
+								</div>
+              </div> <!-- observacao -->
+
+            </div> <!-- linha 3 -->
+
+          </form>
+
+          <div class="row mt-5 text-right">
+            <div class="col-12">
+              <button id="btn_voltar" name="btn_voltar" class="btn-baixa-enfase-primario pl-5 pr-5 mr-3" [routerLink]="['/anuncio-consulta']"> Voltar </button>
+              <button id="btn_salvar" name="btn_salvar" class="btn-alta-enfase-verde pl-5 pr-5" (click)="salvar()"> Salvar </button>
+            </div>
+          </div> <!-- linha ação -->
+
+          <!-- Mensagem de erro -->
+          <div class="row mt-3">
+            <div class="col-12" *ngIf="erros">
+              <div class="alert alert-danger" role="alert">
+                <ul>
+                  <li *ngFor="let erro of erros">
+                    {{erro.descricao}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
